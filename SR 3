@@ -1,0 +1,43 @@
+1.
+import math
+import numpy as np
+
+a = float(input("a="))
+b = float(input("b="))
+h = float(input("h="))
+for x in np.arange(a,b+h,h):
+    y = (x**3 + x**0.5)/(math.exp( x ) + math.atan(x))**2
+    print(y)
+
+
+2.
+def info(a):
+    if a<0:
+        print("-")
+        a = -a
+    else:
+        print("+")
+    
+    if int(a) == a:
+        print("int")
+    else:
+        print("float")
+    
+    if(a%2):
+        print("odd")
+    else:
+        print("even")
+        
+    if int(a) == a:
+        print(len(str(a)) - 2)
+        print("0")
+    else:
+        print(len(str(a)) - 1)
+        print(len(str(a)) - len(str(int(a))) - 1)
+
+    
+a = float(input("a="))
+info(a)
+
+
+3.
