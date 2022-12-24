@@ -41,3 +41,12 @@ info(a)
 
 
 3.
+def found(a):
+    f = open('text.txt', encoding='utf-8')
+    for line in f:
+        if a in line:
+            print(line)
+    
+    
+a = input("a=")
+found(a)
