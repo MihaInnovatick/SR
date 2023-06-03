@@ -1,0 +1,59 @@
+class Message:
+    type_list = ['text', 'number', 'bool', 'other']
+
+    def __init__(self, msg):
+        self.msg = msg
+        if isinstance(msg, str):
+            self.msg_type = 'text'
+        elif isinstance(msg, (int, float)):
+            self.msg_type = 'number'
+        elif isinstance(msg, bool):
+            self.msg_type = 'bool'
+        else:
+            self.msg_type = 'other'
+
+
+class MessageHandler:
+    log_messages = []
+    black_list = ['кефир', 'голубец', 'баклажан']
+
+    def __init__(self, flag_save):
+        self.flag_save = flag_save
+
+    def save(self, flag):
+        self.flag_save = flag
+
+    def echo(self, message):
+        if self.flag_save:
+            self.log_messages.append(message.msg)
+
+        if message.msg_type == 'text':
+            for word in self.black_list:
+                if word in message.msg:
+                    message.msg = message.msg.replace(word, '!@#$%')
+            print(f'Все говорят {message.msg}, а ты купи слона')
+        elif message.msg_type == 'number':
+            print(f'{message.msg}echo')
+        else:
+            print('Ничего не понимаю')
+
+    def getMsg(self, keyword):
+        for message in self.log_messages:
+            if isinstance(message, str):
+                print(message)
+
+
+myMH = MessageHandler(True)
+myMessage1 = Message('Привет! Как дела?')
+myMessage2 = Message(2)
+myMessage3 = Message(True)
+myMessage4 = Message('А кефир есть?')
+myMessage5 = Message('Ладно, пока!')
+myMH.echo(myMessage1)
+myMH.echo(myMessage2)
+myMH.echo(myMessage3)
+myMH.echo(myMessage4)
+myMH.getMsg('?')
+myMH.save(False)
+myMH.echo(myMessage5)
+print(myMH.log_messages)
